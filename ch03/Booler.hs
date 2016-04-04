@@ -65,3 +65,19 @@ reverse2' = foldr (\x acc -> acc ++ [x]) []
 
 product' :: (Num a) => [a] -> a
 product' = foldl1 (*)  
+
+filter2' :: (a -> Bool) -> [a] -> [a]
+filter2' p = foldr (\x acc -> if p x then x : acc else acc) []
+
+filter3' :: (a -> Bool) -> [a] -> [a]
+filter3' p = foldl (\acc x -> if p x then acc ++ [x] else acc) []
+
+head' :: [a] -> a
+head' = foldl1 (\x _ -> x)
+
+last' :: [a] -> a
+last' = foldl1 (\_ x -> x)
+
+sqrtSums :: Int
+sqrtSums = length (takeWhile (<1000) (scanl1 (+) (map sqrt [1..]))) + 1  
+
