@@ -33,9 +33,7 @@ flip' :: (a -> b -> c) -> (b -> a -> c)
 flip' f y x = f x y
 
 map' :: (a -> b) -> [a] -> [b]
-map' _ [] = []
-map' f (x:xs) = f x : map f xs
-
+map' f xs = foldr (\x acc -> f x : acc) [] xs
 
 filter' :: (a -> Bool) -> [a] -> [a]
 filter' _ [] = []
@@ -55,3 +53,15 @@ chain n
 
 numLongChains :: Int
 numLongChains = length (filter (\xs -> length xs > 15) (map chain [1..100]))
+
+sum' :: (Num a) => [a] -> a
+sum' xs = foldl (\acc x -> acc + x) 0 xs
+
+reverse' :: [a] -> [a]
+reverse' = foldl (\acc x -> x : acc) []
+
+reverse2' :: [a] -> [a]
+reverse2' = foldr (\x acc -> acc ++ [x]) []
+
+product' :: (Num a) => [a] -> a
+product' = foldl1 (*)  
